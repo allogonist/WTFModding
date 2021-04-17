@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Win32.SafeHandles;
 
-namespace BackdropExtension
+namespace BackdropsCore
 {
     public class ObjectFieldRev2 : StellarObjectBackdrop
     {
@@ -198,11 +198,10 @@ namespace BackdropExtension
             lightShaftRecomputedOrigin = lightShaftOrgin;
         }
 
-        public override void onFirstLoad(Color color, GraphicsDevice device, IServiceProvider services)
+        public override void onFirstLoad(Color color, GraphicsDevice device, TextureFinder finder)
         {
             this.device = device;
-            content = new ContentManager(services);
-            content.RootDirectory = "Content";
+            content = finder;
             colorKey = color;
             rect = new Rectangle();
             source = new Rectangle();
@@ -227,7 +226,12 @@ namespace BackdropExtension
         //called by background thread
         public override void onPrepare(BackdropRenderQuality quality)
         {
-
+            //finder is a new instance every time but we re-use our first one
+            //since we might be prepared multiple times
+            //if(content == null)
+            //{
+            //    content = finder;
+            //}
             if(quality == BackdropRenderQuality.ultra || quality == BackdropRenderQuality.high)
             {
                 qualityDivider = 1;
@@ -246,7 +250,7 @@ namespace BackdropExtension
 
             if (contentName != null)
             {
-                texArt = content.Load<Texture2D>(contentName);
+                texArt = content.findTexture(contentName);
             }
             loadStellarObjects();
 
@@ -277,11 +281,11 @@ namespace BackdropExtension
                 parallaxAssets = new Texture2D[parallaxNames.Length];
                 for (int i = 0; i < parallaxNames.Length; i++)
                 {
-                    parallaxAssets[i] = content.Load<Texture2D>(parallaxNames[i]);
+                    parallaxAssets[i] = content.findTexture(parallaxNames[i]);
                 }
             }
 
-            backgroundEffect = content.Load<Effect>("backgroundEffect");
+            backgroundEffect = content.findEffect("backgroundEffect");
 
             backgroundEffect_text1 = backgroundEffect.Parameters["texture1"];
             backgroundEffect_text2 = backgroundEffect.Parameters["texture2"];
@@ -352,9 +356,9 @@ namespace BackdropExtension
 
         private void loadPlanetStuff()
         {
-            planetSurface = content.Load<Model>("planetSurface");
-            planetAtmosphere = content.Load<Model>("GeoSphere"); //GeoSphere
-            planetEffect = content.Load<Effect>("planetEffect");
+            planetSurface = content.findModel("planetSurface");
+            planetAtmosphere = content.findModel("GeoSphere"); //GeoSphere
+            planetEffect = content.findEffect("planetEffect");
 
 
 
@@ -376,32 +380,32 @@ namespace BackdropExtension
             mask = new Texture2D[masks.Length];
             for (int i = 0; i < masks.Length; i++)
             {
-                mask[i] = content.Load<Texture2D>(masks[i]);
+                mask[i] = content.findTexture(masks[i]);
             }
             diffuse = new Texture2D[diffuses.Length];
             for (int i = 0; i < diffuses.Length; i++)
             {
-                diffuse[i] = content.Load<Texture2D>(diffuses[i]);
+                diffuse[i] = content.findTexture(diffuses[i]);
             }
             height = new Texture2D[heights.Length];
             for (int i = 0; i < heights.Length; i++)
             {
-                height[i] = content.Load<Texture2D>(heights[i]);
+                height[i] = content.findTexture(heights[i]);
             }
             normal = new Texture2D[normals.Length];
             for (int i = 0; i < normals.Length; i++)
             {
-                normal[i] = content.Load<Texture2D>(normals[i]);
+                normal[i] = content.findTexture(normals[i]);
             }
             emission = new Texture2D[emissions.Length];
             for (int i = 0; i < emissions.Length; i++)
             {
-                emission[i] = content.Load<Texture2D>(emissions[i]);
+                emission[i] = content.findTexture(emissions[i]);
             }
             roughness = new Texture2D[roughnesss.Length];
             for (int i = 0; i < roughnesss.Length; i++)
             {
-                roughness[i] = content.Load<Texture2D>(roughnesss[i]);
+                roughness[i] = content.findTexture(roughnesss[i]);
             }
             luts = new Texture2D[lutParameters.Length];
             for (int i = 0; i < lutParameters.Length; i++)

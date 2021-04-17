@@ -7,12 +7,12 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 
-namespace BackdropExtension
+namespace BackdropsCore
 {
     public class StellarObjectBackdrop : BackdropExt
     {
         protected GraphicsDevice device;
-        protected ContentManager content;
+        protected TextureFinder content;
 
         protected Color colorKey;
 
@@ -28,11 +28,10 @@ namespace BackdropExtension
         public Vector2 lightShaftOrgin = new Vector2(0.5f, 0.5f);
         protected Vector2 lightShaftRecomputedOrigin = new Vector2(0.5f, 0.5f);
 
-        public virtual void onFirstLoad(Color color, GraphicsDevice device, IServiceProvider services)
+        public virtual void onFirstLoad(Color color, GraphicsDevice device, TextureFinder finder)
         {
             this.device = device;
-            content = new ContentManager(services);
-            content.RootDirectory = "Content";
+            content = finder;
             colorKey = color;
             calculateAspect();
             qbatch = new QuadBatch(device);
@@ -41,12 +40,11 @@ namespace BackdropExtension
         public virtual void onPrepare(BackdropRenderQuality quality)
         {
             loadStellarObjects();
-
         }
 
         public void loadStellarObjects()
         {
-            spriteBasic = content.Load<Effect>("spriteBasic");
+            spriteBasic = content.findEffect("spriteBasic");
 
 
             if (stellarObjects != null)
@@ -55,7 +53,7 @@ namespace BackdropExtension
                 {
                     try
                     {
-                        stellarObjects[i].art = content.Load<Texture2D>(stellarObjects[i].assetName);
+                        stellarObjects[i].art = content.findTexture(stellarObjects[i].assetName);
                     }
                     catch
                     {

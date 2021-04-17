@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 
 
-namespace BackdropExtension
+namespace BackdropsCore
 {
     class OpticalDepthLUT
     {

@@ -7,7 +7,7 @@ using WaywardExtensions;
 using Microsoft.Xna.Framework;
 using System.Net.Configuration;
 
-namespace BackdropExtension
+namespace BackdropsCore
 {
     public class MyLoader : ExtensionLoader
     {
@@ -20,7 +20,7 @@ namespace BackdropExtension
         /// During world generation, the game opens all .bdm files in the data folder. .bdm files are png images with their extension changed so you can easily change it back to png to see or change their contents.
         /// 
         /// To define the world-gen algorithm for a sector of your choice, create an extension and a .bdm file.
-        /// 
+        ///  
         /// Below is the code that defines the built-in hand made sectors used for Zero Falls. Obviously if you compile it as-is everything inside will conflict with the existing BackdropCore.dll so if you want to try modifying existing backdrop extensions instead of making your own you should back up your copy of BackdropCore.dll and simply replace it with the compiled output of this project
         /// 
         /// Note: alpha values are ignored in all cases and duplicate colors with different alpha values will be discarded
@@ -32,8 +32,39 @@ namespace BackdropExtension
 
         public void loadExample(Dictionary<Color, BackdropExt> backdrops, Dictionary<string, TextureBatch> sectorTextures, Dictionary<Color, TerrainGenerator> sectorGenerators, Dictionary<Color, LightSettings> lightSettings, Dictionary<Color, LightShaftSettings> lightShaftSettings, Dictionary<Color, string[]> audioSettings, List<Color> preloadRequired, Dictionary<Color, IconBatch> mapIcons, Dictionary<Color, string> iconTechniques, List<string> mapDataIncludes, Dictionary<string, POEIcon> interestIcons, Dictionary<Color, BackdropInfo> backdropInfo)
         {
-
             float planetSizeMult = 1.7f;
+
+
+            /*
+            BiomeSettings homeNebula = new BiomeSettings();
+            homeNebula.hdrHigh = 2.011494f;
+            homeNebula.alphaMin = 0.2241379f;
+            homeNebula.roughness = 1.264368f;
+            homeNebula.edgeIntensity = 1.425287f;
+            homeNebula.lightA = new Vector3(59.08585f, 53.29189f, 19.15382f);
+            homeNebula.lightB = new Vector3(44.21946f, 29.92901f, 16.67004f);
+            homeNebula.generalMult = new Vector3(61.15158f, 58.78672f, 15.63869f);
+            homeNebula.hdrHphase = new Vector3(41.46765f, 37.29175f, 5.553036f);
+            homeNebula.deepBackground = new Vector3(0.01040825f, 0.007652197f, 0.001943454f);
+            homeNebula.starColor = new Vector3(22.97016f, 23.21552f, 4.557853f);
+            homeNebula.starDustColor = new Vector3(1.882478f, 1.308487f, 0.292517f);
+            */
+            /* //more aggresive variant
+            BiomeSettings homeNebula = new BiomeSettings();
+            homeNebula.hdrHigh = 5.0f;
+            homeNebula.alphaMin = 0.7f;
+            homeNebula.roughness = 2.091954f;
+            homeNebula.edgeIntensity = 1.770115f;
+            homeNebula.lightA = new Vector3(29.6396f, 19.44412f, 9.910571f);
+            homeNebula.lightB = new Vector3(43.04922f, 46.98108f, 12.16744f);
+            homeNebula.generalMult = new Vector3(40.37687f, 38.92302f, 19.64284f);
+            homeNebula.hdrHphase = new Vector3(43.64464f, 38.03254f, 8.659586f);
+            homeNebula.deepBackground = new Vector3(0.002226306f, 0.002402059f, 0.001282225f);
+            homeNebula.starColor = new Vector3(15.63093f, 11.28099f, 2.141991f);
+            homeNebula.starDustColor = new Vector3(3.638219f, 3.085216f, 1.21597f);
+            */
+            //new Vector3(0.002557754f, 0.002175016f, 0.000748136f);
+
 
             //Deposit presets
             DepositPreset domumCenterA = new DepositPreset();
@@ -678,6 +709,22 @@ namespace BackdropExtension
             greenLights.ambLightColor = new Color(0.22f, 0.23f, 0.23f, 1f);
             greenLights.fogColor = new Color(0.0f, 0.0f, 0.0f, 0.0f);
 
+            /*
+            Vector4 blueZoneLightShafts = new Vector4(10 - 0.1f, 10 - 7.0f,0,0);
+
+            Vector4 greenZoneLightShafts = new Vector4(10 - 0.14f, 10 - 6.5f, 0, 0);
+            Vector4 greyRoidsLightShafts = new Vector4(10 - 0.12f, 10 - 6.5f, 0, 0);
+
+            Vector4 wolfNebulaEdgeLS = new Vector4(10 - 0.3f, 10 - 6.5f, 0, 0);
+            Vector4 wolfNebulaCoreLS = new Vector4(10 - 0.2f, 10 - 4.5f, 0, 0);
+
+            Vector4 homeNebulaCoreLS = new Vector4(10 - 10.0f, 10 - 10.0f, 0, 0);
+            Vector4 homeNebula2CoreLS = new Vector4(10 - 10.0f, 10 - 10.0f, 0, 0);
+
+            Vector4 purpleNebulaEdgeLS = new Vector4(10 - 0.12f, 10 - 8.9f, 0, 0);
+            Vector4 purpleNebulaCoreLS = new Vector4(10 - 0.10f, 10 - 8.45f, 0, 0);
+            */
+
 
             //First three for color, last oen for fog density
             Vector4 blueZoneLightShafts = new Vector4(0.79f * 0.5f, 0.93f * 0.5f, 1.00f * 0.5f, 1.2f);
@@ -730,12 +777,41 @@ namespace BackdropExtension
             greyBatch.addTiledTechnique("nebula", new Rectangle(0, 1024, 1024, 1024), new Rectangle(0, 512, 512, 512));
             greyBatch.addTiledTechnique("roids", new Rectangle(0, 1024, 1024, 1024), new Rectangle(0, 512, 512, 512), new Rectangle(512, 512, 512, 512));
             greyBatch.addTiledTechnique("planet", new Rectangle(0, 1024, 1024, 1024), new Rectangle(0, 512, 512, 512), new Rectangle(0, 0, 0, 0), new Rectangle(512, 0, 512, 512));
+            //greyBatch.addTiledTechnique("planetroids", new Rectangle(512, 512, 1024, 1024), new Rectangle(0, 0, 512, 512), new Rectangle(512, 0, 512, 512), new Rectangle(512, 0, 512, 512));
 
+            //orangeBatch.addTiledTechnique("nebula", new Rectangle(512, 0, 1024, 1024), new Rectangle(0, 0, 512, 512), new Rectangle(512, 0, 512, 512));
             orangeBatch.addTiledTechnique("roids", new Rectangle(0, 1024, 1024, 1024), new Rectangle(0, 512, 512, 512), new Rectangle(512, 512, 512, 512));
             orangeBatch.addTiledTechnique("planetroids", new Rectangle(0, 1024, 1024, 1024), new Rectangle(0, 512, 512, 512), new Rectangle(512, 512, 512, 512), new Rectangle(512, 0, 512, 512));
 
             greenBatch.addTiledTechnique("nebula", new Rectangle(0, 512, 1024, 1024), new Rectangle(0, 0, 512, 512));
             greenBatch.addTiledTechnique("planet", new Rectangle(0, 1024, 1024, 1024), new Rectangle(0, 512, 512, 512), new Rectangle(0, 0, 0, 0), new Rectangle(512, 0, 512, 512));
+
+            //string[] starIcon = new string[3];
+            //starIcon[0] = null;
+            //starIcon[1] = "256starY";
+            //starIcon[2] = null;
+
+            //string[] roidIconOrange = new string[3];
+            //roidIconOrange[0] = "256roidOT";
+            //roidIconOrange[1] = "256roidOM";
+            //roidIconOrange[2] = "256roidOB";
+
+            //string[] roidIconGrey = new string[3];
+            //roidIconGrey[0] = "256roidGT";
+            //roidIconGrey[1] = "256roidGM";
+            //roidIconGrey[2] = "256roidGB";
+
+            //string[] roidIconBlue = new string[3];
+            //roidIconBlue[0] = "256roidBT";
+            //roidIconBlue[1] = "256roidBM";
+            //roidIconBlue[2] = "256roidBB";
+
+            //string[] roidIconRed = new string[3];
+            //roidIconRed[0] = "256roidRT";
+            //roidIconRed[1] = "256roidRM";
+            //roidIconRed[2] = "256roidRB";
+
+
 
 
             //an example sector using a custom color that can be drawn onto map data
@@ -744,6 +820,37 @@ namespace BackdropExtension
 
             //all sectors with stars generate as yellow unless you override with your own backdrop type
 
+
+            /*
+            star.assetName = "StarObject";
+            star.rotation = 0;
+            star.scale = 30;
+            star.position = new Vector3(0, 0, -50000);
+            b.addStellarObject(star);
+            backdrops[c] = b;
+            audioSettings[c] = orangeSongs;
+            */
+            //mapIcons[c] = starIcon;
+            /*
+
+            //all base planets generated by noise
+            int blue = 0;
+            for (int i = 0; i < 14; i++)
+            {
+                c = new Color(38, 127, blue, 255);
+                blue++;
+                b = new DefaultBackdrop("Stars");
+                star = new StellarObject();
+
+                //FUCK THIS
+
+                star.assetName = "Planet" + (blue + 1).ToString();
+                star.rotation = 0;
+                star.scale = 400;
+                star.position = new Vector3(0, 0, -100000);
+                b.addStellarObject(star);
+                backdrops[c] = b;
+            }*/
 
             string[] asteroidTexNames;
             string[] nebulaTexNames;
@@ -1362,6 +1469,9 @@ namespace BackdropExtension
             #endregion declaringTextures
 
 
+
+            //Prefab myDickButtTest = new Prefab(Directory.GetCurrentDirectory() + @"\Data\Debugtestfab.pfb", "asteroidsBlack", blackAsteroidFieldAssets);
+            //Prefab myDickButtTest = new Prefab(Directory.GetCurrentDirectory() + @"\Data\Debugtestfab.pfb");
             Prefab asteroidStation = new Prefab(Directory.GetCurrentDirectory() + @"\Data\abndnRoidStn.pfb");
             Prefab asteroidStation1 = new Prefab(Directory.GetCurrentDirectory() + @"\Data\abndnRoidStn1.pfb");
             Prefab asteroidStation2 = new Prefab(Directory.GetCurrentDirectory() + @"\Data\abndnRoidStn2.pfb");
@@ -1504,6 +1614,11 @@ namespace BackdropExtension
 
 
             #region Home nebula
+            //LightSettings lightSet = new LightSettings();
+            //lightSet.lightColor = new Color(0.969f, 0.773f, 0.639f);
+            //lightSet.lightIntensity = 1.5f;
+            //lightSet.ambLightColor = new Color(0.25f, 0.28f, 0.35f);
+
             c = new Color(64, 50, 18);
             //backdrops[c] = new DefaultBackdrop("NebulaHome");
             preloadRequired.Add(c);
@@ -1758,6 +1873,14 @@ namespace BackdropExtension
             lightSettings[c] = homeNebulaLights;
             audioSettings[c] = orangeSongs;
 
+
+            //c = new Color(255, 106, 0);
+            //field2 = new ObjectFieldRev2("NebulaHome", asteroidFieldAssets, null, 3500, -150, 4000);
+            //backdrops[c] = field2;
+            //feildGen = new FancyFieldTerrainGenerator(asteroidFieldAssets, "asteroids1");
+            //feildGen.makeVariableDensity(900, 0, 1);
+            //sectorGenerators[c] = feildGen;
+            //lightSettings[c] = lightSet;
 
 
             c = new Color(255, 200, 70);

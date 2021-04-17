@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 
-namespace BackdropExtension
+namespace BackdropsCore
 {
     public class DefaultBackdrop : StellarObjectBackdrop
     {
@@ -21,11 +21,12 @@ namespace BackdropExtension
             contentName = artName;
         }
 
-        public override void onFirstLoad(Color color, GraphicsDevice device, IServiceProvider services)
+        public override void onFirstLoad(Color color, GraphicsDevice device, TextureFinder finder)
         {
             this.device = device;
-            content = new ContentManager(services);
-            content.RootDirectory = "Content";
+            content = finder;
+            //content = new ContentManager(services);
+            //content.RootDirectory = "Content";
             colorKey = color;
             rect = new Rectangle();
             source = new Rectangle();
@@ -35,7 +36,7 @@ namespace BackdropExtension
 
         public override void onPrepare(BackdropRenderQuality quality)
         {
-            texArt = content.Load<Texture2D>(contentName);
+            texArt = content.findTexture(contentName);
             loadStellarObjects();
         }
 

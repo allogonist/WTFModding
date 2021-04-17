@@ -1,0 +1,9 @@
+C:\Users\georg\source\repos\WTFModding\BackdropsCore\MyBackdropExtension\bin\Debug\MyBackdropExtension.dll
+C:\Users\georg\source\repos\WTFModding\BackdropsCore\MyBackdropExtension\bin\Debug\MyBackdropExtension.pdb
+C:\Users\georg\source\repos\WTFModding\BackdropsCore\MyBackdropExtension\bin\Debug\MonoGame.Framework.dll
+C:\Users\georg\source\repos\WTFModding\BackdropsCore\MyBackdropExtension\bin\Debug\WaywardExtensions.dll
+C:\Users\georg\source\repos\WTFModding\BackdropsCore\MyBackdropExtension\obj\Debug\MyBackdropExtension.csprojAssemblyReference.cache
+C:\Users\georg\source\repos\WTFModding\BackdropsCore\MyBackdropExtension\obj\Debug\MyBackdropExtension.csproj.CoreCompileInputs.cache
+C:\Users\georg\source\repos\WTFModding\BackdropsCore\MyBackdropExtension\obj\Debug\MyBackdropExtension.csproj.CopyComplete
+C:\Users\georg\source\repos\WTFModding\BackdropsCore\MyBackdropExtension\obj\Debug\MyBackdropExtension.dll
+C:\Users\georg\source\repos\WTFModding\BackdropsCore\MyBackdropExtension\obj\Debug\MyBackdropExtension.pdb

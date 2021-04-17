@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 
-namespace BackdropExtension
+namespace BackdropsCore
 {
     public class ObjectFieldBackdrop : StellarObjectBackdrop
     {
@@ -38,11 +38,12 @@ namespace BackdropExtension
             zRange = depthRange;
         }
 
-        public override void onFirstLoad(Color color, GraphicsDevice device, IServiceProvider services)
+        public override void onFirstLoad(Color color, GraphicsDevice device, TextureFinder finder)
         {
             this.device = device;
-            content = new ContentManager(services);
-            content.RootDirectory = "Content";
+            content = finder;
+            //content = new ContentManager(services);
+            //content.RootDirectory = "Content";
             colorKey = color;
             rect = new Rectangle();
             source = new Rectangle();
@@ -52,13 +53,13 @@ namespace BackdropExtension
 
         public override void onPrepare(BackdropRenderQuality quality)
         {
-            texArt = content.Load<Texture2D>(contentName);
+            texArt = content.findTexture(contentName);
             loadStellarObjects();
             assets = new Texture2D[assetNames.Length];
             origins = new Vector2[assetNames.Length];
             for (int i = 0; i < assetNames.Length; i++)
             {
-                assets[i] = content.Load<Texture2D>(assetNames[i]);
+                assets[i] = content.findTexture(assetNames[i]);
                 origins[i] = new Vector2(assets[i].Width / 2, assets[i].Height / 2);
             }
             viewableArea = new Rectangle();
@@ -67,7 +68,7 @@ namespace BackdropExtension
                 parallaxAssets = new Texture2D[parallaxNames.Length];
                 for (int i = 0; i < parallaxNames.Length; i++)
                 {
-                    parallaxAssets[i] = content.Load<Texture2D>(parallaxNames[i]);
+                    parallaxAssets[i] = content.findTexture(parallaxNames[i]);
                 }
             }
         }

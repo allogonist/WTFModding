@@ -5,7 +5,7 @@ using System.Text;
 using WaywardExtensions;
 using Microsoft.Xna.Framework;
 
-namespace BackdropExtension
+namespace BackdropsCore
 {
     public enum GenerationStyle : uint
     {

@@ -67,7 +67,6 @@
   <ItemGroup>
     <Compile Include="BackdropInstances\GenericEmptyInstance.cs" />
     <Compile Include="BackdropInstances\ObjectFieldInstance.cs" />
-    <Compile Include="BackdropTestApp.cs" />
     <Compile Include="BiomeSettings.cs" />
     <Compile Include="DefaultBackdrop.cs" />
     <Compile Include="DepositPreset.cs" />
@@ -76,7 +75,6 @@
     <Compile Include="NebulaLightning.cs" />
     <Compile Include="ObjectFieldBackdrop.cs" />
     <Compile Include="ObjectFieldRev2.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="OpticalDepthLUT.cs" />
     <Compile Include="SimpleFieldTerrainGenerator.cs" />
@@ -102,8 +100,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>if $(ConfigurationName) == Debug copy /Y "$(TargetDir)$(TargetName).dll" "$(SolutionDir)\..\WTFNeutral\WTFNeutral\bin\Debug\Extensions\$(TargetName).dll"
-if $(ConfigurationName) == Release copy /Y "$(TargetDir)$(TargetName).dll" "$(SolutionDir)\..\WTFNeutral\WTFNeutral\bin\Release\Extensions\$(TargetName).dll"</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
